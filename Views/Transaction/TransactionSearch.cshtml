@@ -1,0 +1,77 @@
+﻿@using Team_4_Project.Models.ViewModels
+@model Team_4_Project.Models.ViewModels.TransactionSearchViewModel
+
+
+@{
+    ViewData["Title"] = "Transaction Search";
+}
+
+<h1>Search for Transactions</h1>
+<span font color="red">@ViewBag.ErrorMessage</span>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DisplaySearchResults" asp-controller="Transaction" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SelectedTransactionType" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SelectedTransactionType, (SelectList)ViewBag.AllTransactionTypes, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchDescription" class="control-label"></label>
+                <input asp-for="SearchDescription" class="form-control" />
+                <span asp-validation-for="SearchDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAmountRange" class="control-label"></label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.AllAmounts) All</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.UpTo100) $0-$100</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.OneTo200) $100-$200</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.TwoTo300) $200-$300</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.Over300) $300+</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchAmountRange, AmountRange.CustomRange) Custom Range</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAmountLower" class="control-label"></label>
+                <input asp-for="SearchAmountLower" class="form-control" />
+                <span asp-validation-for="SearchAmountLower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchAmountUpper" class="control-label"></label>
+                <input asp-for="SearchAmountUpper" class="form-control" />
+                <span asp-validation-for="SearchAmountUpper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchTransactionNumber" class="control-label"></label>
+                <input asp-for="SearchTransactionNumber" class="form-control" />
+                <span asp-validation-for="SearchTransactionNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchDateRange" class="control-label"></label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchDateRange, DateRange.AllDates) All Dates</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchDateRange, DateRange.Last15Days) Last 15 Days</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchDateRange, DateRange.Last30Days) Last 30 Days</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchDateRange, DateRange.Last60Days) Last 60 Days</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.SearchDateRange, DateRange.CustomRange) Custom Range</label>
+            </div>
+            <div class="form-group">
+                <label>Custom Date Range:</label>
+                <label asp-for="SearchDateLower" class="control-label"></label>
+                <input asp-for="SearchDateLower" class="form-control" />
+                <span asp-validation-for="SearchDateLower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchDateUpper" class="control-label"></label>
+                <input asp-for="SearchDateUpper" class="form-control" />
+                <span asp-validation-for="SearchDateUpper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

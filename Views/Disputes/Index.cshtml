@@ -1,0 +1,50 @@
+@model IEnumerable<Team_4_Project.Models.Disputes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DisputeComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisputeStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CorrectAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestDelete)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisputeComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisputeStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestDelete)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DisputesID">Review</a> |
+                <a asp-action="Details" asp-route-id="@item.DisputesID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DisputesID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

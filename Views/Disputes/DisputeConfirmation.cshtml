@@ -1,0 +1,42 @@
+﻿@model Team_4_Project.Models.Disputes
+@{
+    Layout = "_Layout";
+}
+@Html.HiddenFor(model => model.Transaction.TransactionID)
+<div>
+    <h4>Submitted: Your dispute is awaiting review by a manager.</h4>
+</div>
+<div>
+    <h5>Dispute Details</h5>
+    @Html.HiddenFor(model => model.DisputesID)
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DisputeComment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DisputeComment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CorrectAmount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CorrectAmount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestDelete)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestDelete)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DisputeStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DisputeStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home" >Back to Home</a>
+</div>

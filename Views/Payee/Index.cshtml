@@ -1,0 +1,56 @@
+@model IEnumerable<Team_4_Project.Models.Payee>
+@using Team_4_Project.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pay Bills</h1>
+
+<p>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+    {
+        <a asp-action="Create">Create New Payee</a>
+    }
+
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PayeeID">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayeeType)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.PayeeID">Edit</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+    {
+        <a asp-action="PayBill" asp-controller="Payee" class="btn btn-dark">Pay Bills Online</a>
+        
+    }
+
+</div>
+

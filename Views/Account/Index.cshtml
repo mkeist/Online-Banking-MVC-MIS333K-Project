@@ -1,0 +1,68 @@
+@model IEnumerable<Team_4_Project.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Accounts</h1>
+
+<p>
+    <br /><a asp-action="Create">Apply for an Account</a> |
+    <a asp-controller="Transaction" asp-action="Deposit">Make a Deposit</a> |
+    <a asp-controller="Transaction" asp-action="Withdraw">Make a Withdrawal</a> |
+    <a asp-controller="Transaction" asp-action="Transfer">Transfer Between Accounts</a> </br>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PartialAccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.accountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartialAccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.accountType)
+            </td>
+            <td>
+                @if (item.accountType == AccountType.Stock)
+                {
+                    @ViewBag.Value
+                }
+                else
+                {
+                   @Html.DisplayFor(modelItem => item.Value)
+                }
+
+            </td>
+
+            @if (item.Status == Status.Active || (User.Identity.IsAuthenticated && User.IsInRole("Manager")))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AccountID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AccountID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AccountID">Delete</a>
+                </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

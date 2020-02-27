@@ -1,0 +1,66 @@
+@model Team_4_Project.Models.Payee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Payee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeeStreetAddress" class="control-label"></label>
+                <input asp-for="PayeeStreetAddress" class="form-control" />
+                <span asp-validation-for="PayeeStreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeeCityAddress" class="control-label"></label>
+                <input asp-for="PayeeCityAddress" class="form-control" />
+                <span asp-validation-for="PayeeCityAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeeStateAddress" class="control-label"></label>
+                <input asp-for="PayeeStateAddress" class="form-control" />
+                <span asp-validation-for="PayeeStateAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeeZipCode" class="control-label"></label>
+                <input asp-for="PayeeZipCode" class="form-control" />
+                <span asp-validation-for="PayeeZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeePhoneNumber" class="control-label"></label>
+                <input asp-for="PayeePhoneNumber" class="form-control" />
+                <span asp-validation-for="PayeePhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayeeType" class="control-label"></label><br />
+                <label class="radio">@Html.RadioButtonFor(model => model.PayeeType, PayeeType.CreditCard) Credit Card</label><br />
+                <label class="radio">@Html.RadioButtonFor(model => model.PayeeType, PayeeType.Mortgage) Mortgage</label><br />
+                <label class="radio">@Html.RadioButtonFor(model => model.PayeeType, PayeeType.Rent) Rent</label><br />
+                <label class="radio">@Html.RadioButtonFor(model => model.PayeeType, PayeeType.Utilities) Utilities</label><br />
+                <label class="radio">@Html.RadioButtonFor(model => model.PayeeType, PayeeType.Other) Other</label><br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

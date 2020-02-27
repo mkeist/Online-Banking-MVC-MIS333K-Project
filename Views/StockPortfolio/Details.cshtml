@@ -1,0 +1,96 @@
+@model Team_4_Project.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1> Stock Portfolio Details</h1>
+
+<div>
+
+
+    <hr />
+    <h4>Cash Value Portion</h4>
+    <dl class="row">
+
+        @Html.HiddenFor(m => m.AccountID)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Balanced)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Balanced)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gains)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gains)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CashValueFees)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CashValueFees)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bonuses)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bonuses)
+        </dd>
+
+
+    </dl>
+</div>
+<h4>Stock Portion</h4>
+<table class="table table-primary">
+    <tr>
+        <th>Stock Name</th>
+        <th>Stock Type</th>
+        <th>Number of Shares</th>
+        <th>Current Price</th>
+
+    </tr>
+    @foreach (StockPortion sp in Model.StockPortions)
+    {
+        <tr>
+            <td>@Html.DisplayFor(ModelItem => sp.Stock.StockName)</td>
+            <td>@Html.DisplayFor(ModelItem => sp.Stock.StockType)</td>
+            <td>@Html.DisplayFor(ModelItem => sp.ShareNumber)</td>
+            <td>@Html.DisplayFor(ModelItem => sp.Stock.CurrentPrice)</td>
+
+
+        </tr>
+    }
+</table>
+
+<h5>Stock Portfolio Summary</h5>
+<table class="table table-sm table-bordered" style="width:30%">
+    <tr>
+        <th colspan="2" style="text-align:center">Order Summary</th>
+    </tr>
+    <tr>
+        <td>Cash Portion</td>
+        <td>@Html.DisplayFor(model => model.CashValPortion)</td>
+    </tr>
+    <tr>
+        <td>Stock Portion</td>
+        <td>@ViewBag.StockPortion</td>
+    </tr>
+    <tr>
+        <td>Total Value</td>
+        <td>@Html.DisplayFor(model => model.Value)</td>
+    </tr>
+
+</table>
+
+<div>
+    <div>
+        <a asp-action="Index" class="btn btn-info">Back to List</a>
+        <a asp-action="Index" asp-controller="Stock" class="btn btn-warning">Buy Stock</a>
+        <a asp-action="Index" asp-controller="StockPortion" asp-route-accountID="@Model.AccountID" class="btn btn-danger">View Stocks in Portfolio</a>
+    </div>
+</div>

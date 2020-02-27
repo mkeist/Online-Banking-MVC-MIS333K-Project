@@ -1,0 +1,59 @@
+@model Team_4_Project.Models.StockPortion
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.StockName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.StockName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.TickerSymbol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.TickerSymbol)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.StockType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.StockType)
+        </dd>
+        <dt>
+            Stock's Current Price
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock.CurrentPrice)
+        </dd>
+        <dt>
+            Buying Price
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CurrentPrice)
+        </dd>
+        <dt>
+            Price Change
+        </dt>
+        <dd>
+            @ViewBag.PriceChange
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @*@if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.StockID">Edit</a>
+    }*@
+
+    <a asp-action="Index">Back to List</a>
+</div>

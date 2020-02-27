@@ -1,0 +1,95 @@
+@model Team_4_Project.Models.Disputes
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+{
+    <h1>Review Dispute</h1>
+}
+<h4>Disputes</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Transaction.Account.User.FirstName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Transaction.Account.User.FirstName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Transaction.Account.User.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Transaction.Account.User.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Transaction.TransactionNumber)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Transaction.TransactionNumber)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.DisputeComment)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.DisputeComment)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.DisputeStatus)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.DisputeStatus)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Transaction.TransactionAmount)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Transaction.TransactionAmount)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CorrectAmount)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CorrectAmount)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.RequestDelete)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.RequestDelete)
+    </dd>
+</dl>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DisputesID" />
+            <input type="hidden" asp-for="DisputeComment" />
+
+            <div class="form-group">
+                <label asp-for="ManagerComment" class="control-label"></label>
+                <input asp-for="ManagerComment" class="form-control" />
+                <span asp-validation-for="ManagerComment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ManagerAdjustAmount" class="control-label"></label>
+                <input asp-for="ManagerAdjustAmount" class="form-control" />
+                <span asp-validation-for="ManagerAdjustAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisputeStatus" class="control-label"></label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DisputeStatus, DisputeStatus.Accepted) Accepted</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DisputeStatus, DisputeStatus.Rejected) Rejected</label>
+                <label class="radio">@Html.RadioButtonFor(model => model.DisputeStatus, DisputeStatus.Adjusted) Adjusted</label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Disputes">Back to All Disputes</a>
+</div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Team_4_Project.Models.Transaction>
+
+@{
+    ViewData["Title"] = "AllTransactions";
+}
+
+<h1>Pending Transactions</h1>
+
+<p>
+    <a asp-action="Deposit">Make a Deposit</a> |
+    <a asp-action="Transfer">Transfer Between Accounts</a>
+    @if (User.IsInRole("Manager"))
+    {
+        <a asp-action="AllTransactions">| Show All Transactions</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Status == TransactionStatus.Pending)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.TransactionID">Details |</a>
+                        @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.TransactionID">Approve |</a>
+                            <a asp-action="Delete" asp-route-id="@item.TransactionID">Delete </a>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="TransactionSearch">Search Transactions</a>
+</div>

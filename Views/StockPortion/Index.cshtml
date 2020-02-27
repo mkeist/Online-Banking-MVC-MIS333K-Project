@@ -1,0 +1,59 @@
+@model IEnumerable<Team_4_Project.Models.StockPortion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Index" asp-controller="Stock">Buy Stock</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock.StockName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock.TickerSymbol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock.CurrentPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock.StockFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShareNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.StockName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.TickerSymbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.CurrentPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock.StockFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShareNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.StockPortionID">Sell Stock |</a>
+                    <a asp-action="Details" asp-route-id="@item.StockPortionID">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

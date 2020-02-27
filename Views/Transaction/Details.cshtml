@@ -1,0 +1,95 @@
+@model Team_4_Project.Models.Transaction
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="row">
+        @Html.HiddenFor(model => model.Account.AccountID)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Account.PartialAccountNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Account.PartialAccountNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Account.AccountName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Account.AccountName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionAmount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionAmount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransactionDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+    </dl>
+</div>
+<h5>Disputes</h5>
+<table class="table table-bordered">
+    <tr>
+        <th>Dispute Comment</th>
+        <th>Dispute Status</th>
+    </tr>
+    @foreach (Disputes d in Model.Disputes)
+    {
+    <tr>
+        <td>@d.DisputeComment</td>
+        <td>@d.DisputeStatus</td>
+    </tr>
+    }
+</table>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TransactionID">Edit</a> |
+    <a asp-action="Index" asp-route-accountid="@Model.Account.AccountID">Back to List</a>
+
+    @if (Model.TransactionType != TransacType.Transfer)
+    {
+        <a asp-action="Create" asp-controller="Disputes" asp-route-transactionid="@Model.TransactionID">| Dispute this Transaction</a>
+    }
+
+</div>
